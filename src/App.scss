@@ -1,0 +1,29 @@
+@use '_colors.scss';
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: colors.$gray;
+  font-family: 'Kanit', sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: colors.$black;
+  color: colors.$white;
+  gap: 10px;
+
+  .title {
+    font-size: 35px;
+  }
+
+  .icon {
+    border: 1px white solid;
+    height: 32px;
+    width: 32px;
+  }
+}
