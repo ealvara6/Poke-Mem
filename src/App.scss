@@ -98,25 +98,26 @@ button:active {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-  // width: 170px;
-  height: 200px;
   border-radius: 5px;
   overflow: hidden;
+  transition: transform 0.1s;
   
-  .img{
+  img{
     flex-grow: 1;
-  }
-
-  .img {
     border-bottom: 1px solid black;
-    
+    height: 150px;
+    background-color: colors.$white;
   }
-
   .name {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: colors.$teal;
+    background-color: colors.$black;
     height: 50px;
   }
+}
+
+.card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }

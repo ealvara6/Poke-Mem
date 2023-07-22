@@ -1,9 +1,10 @@
-const Card = () => {
+const Card = (props) => {
+  const { id, name, img } = { ...props};
   return (
-    <div className="card">
-      <div className="img">Image Here</div>
+    <div className="card" id={id}>
+      <img src={img} alt={name} />
       <div className="name">
-        <div>Name Here</div>
+        <div>{name}</div>
       </div>
     </div>
   )
