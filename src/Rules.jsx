@@ -33,7 +33,6 @@ const Rules = () => {
   return (
     <>
     <button className="rules" onClick={openModal}>Rules</button>
-    {/* <RulesModal /> */}
     {showModal ? <RulesModal closeModal={closeModal} /> : null}
     </>
   )

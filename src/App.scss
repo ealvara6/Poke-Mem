@@ -1,11 +1,15 @@
 @use '_colors.scss';
 
+#root, button {
+  font-family: 'Kanit', sans-serif;
+  color: colors.$white;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: colors.$gray;
-  font-family: 'Kanit', sans-serif;
   gap: 15px;
 }
 
@@ -15,7 +19,6 @@
   justify-content: center;
   height: 100px;
   background-color: colors.$black;
-  color: colors.$white;
   gap: 10px;
 
   .title {
@@ -28,6 +31,27 @@
     height: 32px;
     width: 32px;
   }
+
+  .title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-grow: 1;
+  }
+
+  .scoreboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 10px;
+    font-size: 20px;
+    @media (max-width: 590px) {
+      flex-direction: column;
+    }
+  }
+
 }
 
 .game-info {
@@ -36,14 +60,12 @@
 }
 
 button {
-  color: colors.$white;
   background-color: rgba($color: colors.$teal, $alpha: 0.5);
   width: 115px;
   height: 40px;
   border-radius: 6px;
   border: none;
   font-size: 20px;
-  font-weight: 100;
   transition: transform 100ms;
 }
 
