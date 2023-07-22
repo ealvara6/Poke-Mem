@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
+import arrayShuffle from 'array-shuffle';
 
 
 const Cards = () => {
-  const pokemonArr = ['pikachu', 'bulbasaur', 'squirtle', 'charmander'];
+  let pokemonArr = ['pikachu', 'bulbasaur', 'squirtle', 'charmander'];
   const api = 'https://pokeapi.co/api/v2/pokemon/';
 
   const [pokemon, setPokemon] = useState({
     isLoaded: false,
     pokemonData: [],
   });
+
+  const shuffleCards = () => {
+    setPokemon({
+      isLoaded: true,
+      pokemonData: arrayShuffle(pokemon.pokemonData),
+    }); 
+  }
 
   useEffect(() => {
       const promises = pokemonArr.map(async (pokemonName) => {
@@ -24,16 +32,18 @@ const Cards = () => {
       })
       
       Promise.all(promises).then((arr) => {
-        const newArr = arr.map((item) => <Card key={item.id} name={item.name} img={item.img} />);
         setPokemon({
           isLoaded: true,
-          pokemonData: newArr,
+          pokemonData: arr,
         });
       })
   }, []);
+
+  const cardsArr = pokemon.pokemonData.map((item) => <Card key={item.id} name={item.name} img={item.img} handleClick={shuffleCards} />);
+
   return (
     <div className="cards">
-      {pokemon.isLoaded ? pokemon.pokemonData : 'loading'}
+      {pokemon.isLoaded ? cardsArr : 'loading'}
     </div>
   )
 }
