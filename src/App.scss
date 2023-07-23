@@ -80,22 +80,21 @@ button:active {
 
 .main-content {
   display: flex;
-  flex-grow: 1;
   justify-content: center;
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-template-rows: repeat(2, min-content);
+  display: flex;
+  flex-wrap: wrap;  
   justify-content: center;
   gap: 20px;
-  width: 500px;
   margin: 0px 15px;
 }
 
 .card {
   display: flex;
+  width: 200px;
+  height: 200px;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import arrayShuffle from 'array-shuffle';
+import data from './data.json';
 
 
 const Cards = () => {
-  let pokemonArr = ['pikachu', 'bulbasaur', 'squirtle', 'charmander'];
+  let pokemonArr = data[0];
   const api = 'https://pokeapi.co/api/v2/pokemon/';
 
   const [pokemon, setPokemon] = useState({
@@ -12,10 +13,18 @@ const Cards = () => {
     pokemonData: [],
   });
 
-  const shuffleCards = () => {
+  const handleClick = (id) => {
+    const newArr = pokemon.pokemonData.map((item) => {
+      if (item.id === id) {
+        if (item.isclicked) console.log(`${item.name} was clicked twice`);
+        else item.isclicked = true;
+      }
+      return item;
+    });
+
     setPokemon({
       isLoaded: true,
-      pokemonData: arrayShuffle(pokemon.pokemonData),
+      pokemonData: arrayShuffle(newArr),
     }); 
   }
 
@@ -27,6 +36,7 @@ const Cards = () => {
           id: json.id,
           name: json.name,
           img: json.sprites.front_default,
+          isclicked: false,
         }
         return pokemonData;
       })
@@ -39,7 +49,9 @@ const Cards = () => {
       })
   }, []);
 
-  const cardsArr = pokemon.pokemonData.map((item) => <Card key={item.id} name={item.name} img={item.img} handleClick={shuffleCards} />);
+  const cardsArr = pokemon.pokemonData.map((item) => {
+  return <Card key={item.id} id={item.id} name={item.name} img={item.img} handleClick={handleClick} />
+});
 
   return (
     <div className="cards">
