@@ -68,14 +68,11 @@ button {
   border: none;
   font-size: 20px;
   transition: transform 100ms;
+  cursor: pointer; 
 }
 
 button:hover {
   transform: translate(1px, -1px);
-}
-
-button:active {
-  transform: none;
 }
 
 .main-content {

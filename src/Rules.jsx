@@ -9,9 +9,7 @@ const RulesModal = (props) => {
       The goal of the game is to click on as many cards as you can without clicking on the same card twice.
     </>
   );
-  const buttons = (
-    <button onClick={closeModal}>Close</button>
-  )
+  const buttons = <button onClick={closeModal}>Close</button>;
 
 
   return (

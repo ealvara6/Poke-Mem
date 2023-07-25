@@ -4,7 +4,8 @@ import arrayShuffle from 'array-shuffle';
 
 
 const Cards = (props) => {
-  const { level, nextLevel, usedPokemon } = { ...props };
+  const { level, nextLevel, usedPokemon, gameOver } = { ...props };
+  // console.log(level);
   const api = 'https://pokeapi.co/api/v2/pokemon/';
 
   const [pokemon, setPokemon] = useState({
@@ -20,6 +21,11 @@ const Cards = (props) => {
   }
 
   const handleClick = (id) => {
+    const clickedPokemon = pokemon.pokemonData.find((item) => item.id === id);
+    if (clickedPokemon.isclicked) {
+      return gameOver();
+    }
+
     const newArr = pokemon.pokemonData.map((item) => {
       if (item.id === id) {
         item.isclicked = true;
@@ -39,7 +45,7 @@ const Cards = (props) => {
   useEffect(() => {
     const pokemonArr = [];
     let id = undefined;
-    for (let i = 0; i < level; i += 1) {
+    for (let i = 0; i < level[0]; i += 1) {
       do {
         id = Math.floor(Math.random() * 150) + 1;
       }
@@ -65,7 +71,8 @@ const Cards = (props) => {
           pokemonData: arr,
         });
       }).catch((e) => console.log(e));
-  }, [level]);
+  }, [level, usedPokemon]);
+
   const cardsArr = pokemon.pokemonData.map((item) => {
   return <Card key={item.id} id={item.id} name={item.name} img={item.img} handleClick={handleClick} />
 });

@@ -43,3 +43,23 @@
     align-self: flex-end;
   }
 }
+
+.gameover-modal {
+
+  .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .scoreboard {
+    display: flex;
+    font-size: 24px;
+    gap: 15px;
+  }
+
+  .modal-buttons {
+    align-self: center;
+    justify-self: center;
+  }
+}
