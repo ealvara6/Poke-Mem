@@ -117,3 +117,7 @@ button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+.card:active {
+  transform: none;
+}

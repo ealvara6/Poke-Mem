@@ -4,12 +4,10 @@ import arrayShuffle from 'array-shuffle';
 
 
 const Cards = (props) => {
-  const { level, nextLevel, usedPokemon, gameOver } = { ...props };
-  // console.log(level);
+  const { level, nextLevel, usedPokemon, gameOver, addScore } = { ...props };
   const api = 'https://pokeapi.co/api/v2/pokemon/';
-
+  const [isLoaded, setIsLoaded] = useState(false);
   const [pokemon, setPokemon] = useState({
-    isLoaded: false,
     pokemonIds: [],
     pokemonData: [],  
   });
@@ -35,42 +33,46 @@ const Cards = (props) => {
 
     checkLevel();
 
+    setIsLoaded(true);
     setPokemon({
-      isLoaded: true,
       pokemonIds: pokemon.pokemonIds,
       pokemonData: arrayShuffle(newArr),
     });
+    addScore();
   }
 
   useEffect(() => {
-    const pokemonArr = [];
-    let id = undefined;
-    for (let i = 0; i < level[0]; i += 1) {
-      do {
-        id = Math.floor(Math.random() * 150) + 1;
-      }
-      while (pokemonArr.includes(id) || usedPokemon.includes(id));
-      pokemonArr.push(id);
-    }
-      const promises = pokemonArr.map(async (pokemonName) => {
-        const response = await fetch(api + pokemonName);
-        const json = await response.json();
-        const pokemonData = {
-          id: json.id,
-          name: json.name,
-          img: json.sprites.front_default,
-          isclicked: false,
+      const pokemonArr = [];
+      let id;
+      for (let i = 0; i < level[0]; i += 1) {
+        do {
+          id = Math.floor(Math.random() * 150) + 1;
         }
-        return pokemonData;
-      })
-      
-      Promise.all(promises).then((arr) => {
-        setPokemon({
-          isLoaded: true,
-          pokemonIds: pokemonArr,
-          pokemonData: arr,
-        });
-      }).catch((e) => console.log(e));
+        while (pokemonArr.includes(id) || usedPokemon.includes(id));
+        pokemonArr.push(id);
+      }
+        const promises = pokemonArr.map(async (pokemonName) => {
+          const response = await fetch(api + pokemonName);
+          const json = await response.json();
+          const pokemonData = {
+            id: json.id,
+            name: json.name,
+            img: json.sprites.front_default,
+            isclicked: false,
+          }
+          return pokemonData;
+        })
+        
+        Promise.all(promises).then((arr) => {
+          setIsLoaded(true);
+          setPokemon({
+            pokemonIds: pokemonArr,
+            pokemonData: arr,
+          });
+        }).catch((e) => console.log(e));
+
+    return setIsLoaded(false);
+
   }, [level, usedPokemon]);
 
   const cardsArr = pokemon.pokemonData.map((item) => {
@@ -79,7 +81,7 @@ const Cards = (props) => {
 
   return (
     <div className="cards">
-      {pokemon.isLoaded ? cardsArr : 'loading'}
+      {isLoaded ? cardsArr : 'loading'}
     </div>
   )
 }

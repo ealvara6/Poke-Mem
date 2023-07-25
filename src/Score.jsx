@@ -1,8 +1,10 @@
-const Score = () => {
+const Score = (props) => {
+  const { score, bestScore } = { ...props };
+
   return (
     <div className="scoreboard">
-      <div className="current-score">Score: 0</div>
-      <div className="best-score">Best Score: 0</div>
+      <div className="current-score">Score: {score}</div>
+      <div className="best-score">Best Score: {bestScore}</div>
     </div>
   )
 }
