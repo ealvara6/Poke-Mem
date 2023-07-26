@@ -2,15 +2,15 @@
 
 #root, button {
   font-family: 'Kanit', sans-serif;
-  color: colors.$white;
+  color: colors.$text-dark;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: colors.$gray;
-  gap: 15px;
+  background-color: colors.$secondary-light;
+  gap: 45px;
 }
 
 .header {
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   height: 100px;
-  background-color: colors.$black;
+  background-color: colors.$secondary-dark;
   gap: 10px;
 
   .title {
@@ -36,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 15px;
     flex-grow: 1;
   }
 
@@ -61,7 +61,7 @@
 }
 
 button {
-  background-color: rgba($color: colors.$teal, $alpha: 0.5);
+  background-color: rgba($color: colors.$primary-dark, $alpha: 1);
   width: 115px;
   height: 40px;
   border-radius: 6px;
@@ -93,7 +93,7 @@ button:hover {
   width: 200px;
   height: 200px;
   flex-direction: column;
-  border: 1px solid black;
+  border: 1px solid colors.$secondary-dark;
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.1s;
@@ -102,13 +102,13 @@ button:hover {
     flex-grow: 1;
     border-bottom: 1px solid black;
     height: 150px;
-    background-color: colors.$white;
+    background-color: colors.$primary-light;
   }
   .name {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: colors.$black;
+    background-color: colors.$secondary-dark;
     height: 50px;
   }
 }
@@ -120,4 +120,21 @@ button:hover {
 
 .card:active {
   transform: none;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid colors.$secondary-dark;
+  border-top: 10px solid colors.$primary-dark;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
 }

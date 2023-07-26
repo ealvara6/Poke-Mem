@@ -46,7 +46,10 @@ const App = () => {
     <GameInfo />
     <MainContent>
     <Cards level={level} nextLevel={nextLevel} usedPokemon={usedPokemon} gameOver={gameOver} addScore={addScore} />
-    {isGameOver && <GameOverModal retry={retry}><Score score={score} bestScore={bestScore} /></GameOverModal>}
+    {isGameOver &&
+      <GameOverModal retry={retry}>
+        <Score score={score} bestScore={bestScore} />
+      </GameOverModal>}
     </MainContent>
     </>
   )

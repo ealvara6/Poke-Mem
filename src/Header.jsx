@@ -1,5 +1,4 @@
-import Score from './Score';
-import icon from './assets/memory-64.png';
+import icon from './assets/pokeball-64.png';
 
 const Header = (props) => {
   const { children } = { ...props };

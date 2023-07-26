@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # credits
 
-header icon - <a href="https://www.flaticon.com/free-icons/memory-loss" title="memory loss icons">Memory loss icons created by Good Ware - Flaticon</a>
+header icon - <a href="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons">Pokemon icons created by Nikita Golubev - Flaticon</a>

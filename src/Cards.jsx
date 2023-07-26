@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import arrayShuffle from 'array-shuffle';
+import Loading from "./Loading";
 
 
 const Cards = (props) => {
@@ -42,34 +43,34 @@ const Cards = (props) => {
   }
 
   useEffect(() => {
-      const pokemonArr = [];
-      let id;
-      for (let i = 0; i < level[0]; i += 1) {
-        do {
-          id = Math.floor(Math.random() * 150) + 1;
-        }
-        while (pokemonArr.includes(id) || usedPokemon.includes(id));
-        pokemonArr.push(id);
+    const pokemonArr = [];
+    let id;
+    for (let i = 0; i < level[0]; i += 1) {
+      do {
+        id = Math.floor(Math.random() * 150) + 1;
       }
-        const promises = pokemonArr.map(async (pokemonName) => {
-          const response = await fetch(api + pokemonName);
-          const json = await response.json();
-          const pokemonData = {
-            id: json.id,
-            name: json.name,
-            img: json.sprites.front_default,
-            isclicked: false,
-          }
-          return pokemonData;
-        })
-        
-        Promise.all(promises).then((arr) => {
-          setIsLoaded(true);
-          setPokemon({
-            pokemonIds: pokemonArr,
-            pokemonData: arr,
-          });
-        }).catch((e) => console.log(e));
+      while (pokemonArr.includes(id) || usedPokemon.includes(id));
+      pokemonArr.push(id);
+    }
+      const promises = pokemonArr.map(async (pokemonName) => {
+        const response = await fetch(api + pokemonName);
+        const json = await response.json();
+        const pokemonData = {
+          id: json.id,
+          name: json.name,
+          img: json.sprites.front_default,
+          isclicked: false,
+        }
+        return pokemonData;
+      })
+      
+      Promise.all(promises).then((arr) => {
+        setIsLoaded(true);
+        setPokemon({
+          pokemonIds: pokemonArr,
+          pokemonData: arr,
+        });
+      }).catch((e) => console.log(e));
 
     return setIsLoaded(false);
 
@@ -81,7 +82,7 @@ const Cards = (props) => {
 
   return (
     <div className="cards">
-      {isLoaded ? cardsArr : 'loading'}
+      {isLoaded ? cardsArr : <Loading />}
     </div>
   )
 }
