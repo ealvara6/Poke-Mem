@@ -4,8 +4,20 @@ import arrayShuffle from 'array-shuffle';
 import Loading from "./Loading";
 
 
+const randomIntFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 const Cards = (props) => {
-  const { level, nextLevel, usedPokemon, gameOver, addScore } = { ...props };
+  const {
+    level,
+    nextLevel,
+    usedPokemon,
+    gameOver,
+    addScore,
+    generation,
+  } = { ...props };
+
   const api = 'https://pokeapi.co/api/v2/pokemon/';
   const [isLoaded, setIsLoaded] = useState(false);
   const [pokemon, setPokemon] = useState({
@@ -47,7 +59,7 @@ const Cards = (props) => {
     let id;
     for (let i = 0; i < level[0]; i += 1) {
       do {
-        id = Math.floor(Math.random() * 150) + 1;
+        id = randomIntFromInterval(generation.min, generation.max);
       }
       while (pokemonArr.includes(id) || usedPokemon.includes(id));
       pokemonArr.push(id);

@@ -8,12 +8,17 @@ import GameOverModal from './GameOverModal';
 import './App.scss';
 import CurrentLevel from './CurrentLevel';
 import Footer from './Footer';
+import StartGen from './StartGen';
 
 const App = () => {
-  const levels = [4, 6, 8, 10, 12, 14, 16];
+  const levels = [4, 5, 6, 7, 8, 9, 10];
   const [level, setLevel] = useState({
     levels,
     currentLevel: 1,
+  });
+  const [start, setStart] = useState({
+    start: false,
+    generation: null,
   });
   const [usedPokemon, setUsedPokemon] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -49,19 +54,69 @@ const App = () => {
     setScore(score + 1);
   }
 
+  const startGame = (generation) => {
+    let min;
+    let max;
+    switch (generation) {
+      case 1:
+        min = 1;
+        max = 151;
+        break;
+      case 2:
+        min = 152;
+        max = 251;
+        break;
+      case 3:
+        min = 252;
+        max = 386;
+        break;
+      case 4:
+        min = 387;
+        max = 493;
+        break;
+    }
+    setStart({
+      start: true,
+      generation: {
+        min,
+        max,
+      }
+    });
+  }
+
+  const newGen = () => {
+    setStart({
+      start: false,
+      generation: null,
+    })
+    retry();
+  }
+
   return (
     <>
     <Header>
       <Score score={score} bestScore={bestScore} />
     </Header>
-    <GameInfo />
-    <CurrentLevel level={level.currentLevel} />
     <MainContent>
-    <Cards level={level.levels} nextLevel={nextLevel} usedPokemon={usedPokemon} gameOver={gameOver} addScore={addScore} />
-    {isGameOver &&
-      <GameOverModal retry={retry}>
-        <Score score={score} bestScore={bestScore} />
-      </GameOverModal>}
+      {start.start ?
+      <>
+      <GameInfo />
+      <CurrentLevel level={level.currentLevel} />
+      <Cards
+        level={level.levels}
+        nextLevel={nextLevel}
+        usedPokemon={usedPokemon}
+        gameOver={gameOver}
+        addScore={addScore}
+        generation={start.generation}
+      />
+      {isGameOver &&
+        <GameOverModal newGen={newGen} retry={retry}>
+          <Score score={score} bestScore={bestScore} />
+        </GameOverModal>}
+      </> :
+      <StartGen startGame={startGame} />
+      }
     </MainContent>
     <Footer />
     </>

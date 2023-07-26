@@ -82,8 +82,26 @@ button:hover {
 
 .main-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   flex-grow: 1;
+  gap: 50px;
+}
+
+.start-gen {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  gap: 20px;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  button {
+    width: 500px;
+    height: 100px;
+  }
 }
 
 .cards {

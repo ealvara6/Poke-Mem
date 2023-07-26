@@ -39,6 +39,7 @@
   }
 
   .modal-buttons {
+    display: flex;
     align-self: flex-end;
   }
 }
@@ -59,6 +60,6 @@
 
   .modal-buttons {
     align-self: center;
-    justify-self: center;
+    gap: 25px;
   }
 }
