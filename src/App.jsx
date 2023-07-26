@@ -7,6 +7,7 @@ import Cards from './Cards';
 import GameOverModal from './GameOverModal';
 import './App.scss';
 import CurrentLevel from './CurrentLevel';
+import Footer from './Footer';
 
 const App = () => {
   const levels = [4, 6, 8, 10, 12, 14, 16];
@@ -62,6 +63,7 @@ const App = () => {
         <Score score={score} bestScore={bestScore} />
       </GameOverModal>}
     </MainContent>
+    <Footer />
     </>
   )
 }
