@@ -1,7 +1,7 @@
 @use '_colors.scss';
 
 #root, button {
-  font-family: 'Kanit', sans-serif;
+  font-family: pixel;
   color: colors.$text-dark;
 }
 
@@ -42,17 +42,22 @@
 
   .scoreboard {
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-grow: 1;
     gap: 10px;
     font-size: 20px;
-    @media (max-width: 590px) {
-      flex-direction: column;
-      align-items: flex-start;
+  }
+  
+}
+@media (max-width: 590px) {
+  .scoreboard {
+    flex-direction: column;
+  }
+  .title-icon {
+    img {
+      display: none;
     }
   }
-
 }
 
 .game-info {
@@ -94,22 +99,23 @@ button:hover {
   height: 200px;
   flex-direction: column;
   border: 1px solid colors.$secondary-dark;
+  background-color: colors.$primary-light;
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.1s;
   
   img{
     flex-grow: 1;
-    border-bottom: 1px solid black;
     height: 150px;
-    background-color: colors.$primary-light;
   }
   .name {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: colors.$secondary-dark;
     height: 50px;
+    div {
+      font-size: 20px;
+    }
   }
 }
 
@@ -137,4 +143,11 @@ button:hover {
   border-top: 10px solid colors.$primary-dark;
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
+}
+
+.current-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
 }

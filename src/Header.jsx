@@ -6,7 +6,7 @@ const Header = (props) => {
     <div className="header">
       <div className="title-icon">
       <img src={icon} alt="" />
-      <h1 className="title">Memory Card Game</h1>
+      <h1 className="title">POKE-MEM</h1>
       </div>
       {children}
     </div>
