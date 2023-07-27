@@ -54,16 +54,17 @@ const Cards = (props) => {
     addScore();
   }
 
-  useEffect(() => {
-    const pokemonArr = [];
-    let id;
-    for (let i = 0; i < level[0]; i += 1) {
-      do {
-        id = randomIntFromInterval(generation.min, generation.max);
-      }
-      while (pokemonArr.includes(id) || usedPokemon.includes(id));
-      pokemonArr.push(id);
+  const pokemonArr = [];
+  let id;
+  for (let i = 0; i < level[0]; i += 1) {
+    do {
+      id = randomIntFromInterval(generation.min, generation.max);
     }
+    while (pokemonArr.includes(id) || usedPokemon.includes(id));
+    pokemonArr.push(id);
+  }
+
+  useEffect(() => {
       const promises = pokemonArr.map(async (pokemonName) => {
         const response = await fetch(api + pokemonName);
         const json = await response.json();
@@ -86,7 +87,7 @@ const Cards = (props) => {
 
     return setIsLoaded(false);
 
-  }, [level, usedPokemon]);
+  }, [level, usedPokemon, generation.min, generation.max]);
 
   const cardsArr = pokemon.pokemonData.map((item) => {
   return <Card key={item.id} id={item.id} name={item.name} img={item.img} handleClick={handleClick} />
