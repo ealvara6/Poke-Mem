@@ -74,6 +74,9 @@ const App = () => {
         min = 387;
         max = 493;
         break;
+      case 5:
+        min = 494;
+        max = 649;
     }
     setStart({
       start: true,
