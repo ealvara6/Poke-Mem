@@ -1,11 +1,12 @@
-import Rules from "./Rules";
+import React from 'react';
+import Rules from './Rules';
 
-const GameInfo = () => {
+function GameInfo() {
   return (
     <div className="game-info">
       <Rules />
     </div>
-  )
+  );
 }
 
 export default GameInfo;

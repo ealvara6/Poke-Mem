@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import GameInfo from './GameInfo';
 import MainContent from './MainContent';
@@ -10,7 +10,7 @@ import CurrentLevel from './CurrentLevel';
 import Footer from './Footer';
 import StartGen from './StartGen';
 
-const App = () => {
+function App() {
   const levels = [4, 5, 6, 7, 8, 9, 10];
   const [level, setLevel] = useState({
     levels,
@@ -31,16 +31,16 @@ const App = () => {
     setLevel((prevState) => ({
       levels: newLevel,
       currentLevel: prevState.currentLevel + 1,
-    }))
+    }));
     setUsedPokemon(tmpArr);
-  }
+  };
 
   const gameOver = () => {
-    score > bestScore && setBestScore(score);
+    if (score > bestScore) setBestScore(score);
     setIsGameOver(true);
-  }
+  };
 
-  const retry =() => {
+  const retry = () => {
     const temparr = [...levels];
     setLevel({
       levels: temparr,
@@ -48,11 +48,11 @@ const App = () => {
     });
     setIsGameOver(false);
     setScore(0);
-  }
+  };
 
   const addScore = () => {
     setScore(score + 1);
-  }
+  };
 
   const startGame = (generation) => {
     let min;
@@ -77,53 +77,58 @@ const App = () => {
       case 5:
         min = 494;
         max = 649;
+        break;
+      default:
+        throw new Error();
     }
     setStart({
       start: true,
       generation: {
         min,
         max,
-      }
+      },
     });
-  }
+  };
 
   const newGen = () => {
     setStart({
       start: false,
       generation: null,
-    })
+    });
     retry();
-  }
+  };
 
   return (
     <>
-    <Header>
-      <Score score={score} bestScore={bestScore} />
-    </Header>
-    <MainContent>
-      {start.start ?
-      <>
-      <GameInfo />
-      <CurrentLevel level={level.currentLevel} />
-      <Cards
-        level={level.levels}
-        nextLevel={nextLevel}
-        usedPokemon={usedPokemon}
-        gameOver={gameOver}
-        addScore={addScore}
-        generation={start.generation}
-      />
-      {isGameOver &&
-        <GameOverModal newGen={newGen} retry={retry}>
-          <Score score={score} bestScore={bestScore} />
-        </GameOverModal>}
-      </> :
-      <StartGen startGame={startGame} />
-      }
-    </MainContent>
-    <Footer />
+      <Header>
+        <Score score={score} bestScore={bestScore} />
+      </Header>
+      <MainContent>
+        {start.start
+          ? (
+            <>
+              <GameInfo />
+              <CurrentLevel level={level.currentLevel} />
+              <Cards
+                level={level.levels}
+                nextLevel={nextLevel}
+                usedPokemon={usedPokemon}
+                gameOver={gameOver}
+                addScore={addScore}
+                generation={start.generation}
+              />
+              {isGameOver && (
+              <GameOverModal newGen={newGen} retry={retry}>
+                <Score score={score} bestScore={bestScore} />
+              </GameOverModal>
+              )}
+            </>
+          )
+          : <StartGen startGame={startGame} />}
+      </MainContent>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,7 +1,10 @@
+import React from 'react';
 import './modal.scss';
 
-const Modal = (props) => {
-  const { header, body, buttons, styles} = {...props};
+function Modal(props) {
+  const {
+    header, body, buttons, styles,
+  } = { ...props };
   return (
     <div className="modal">
       <div className={`modal-content ${styles}`}>
@@ -10,7 +13,7 @@ const Modal = (props) => {
         <div className="modal-buttons">{buttons}</div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Modal;
