@@ -85,13 +85,17 @@ button:hover {
   flex-direction: column;
   flex-grow: 1;
   gap: 50px;
+  padding: 0px 50px;
 }
 
 .start-gen {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 500px;
   align-self: center;
   align-items: center;
+  text-align: center;
   gap: 20px;
 
   h1 {
@@ -99,7 +103,7 @@ button:hover {
   }
 
   button {
-    width: 500px;
+    width: 100%;
     height: 100px;
   }
 }
